@@ -2,13 +2,13 @@
  * MQTT-WebClient example for Web-IO 4.0
 */
 var hostname = "driver.cloudmqtt.com";
-var port = 18946;
+var port = 38946;
 var clientId = "webio4mqttexample";
 clientId += new Date().getUTCMilliseconds();
 var username = "ewdpapwh";
-var password = "rUNEkxct20fm";
+var password = "B4WTn_t0AJUN";
 var subscription = "hector/led";
-
+var temperaturas =  -1;
 mqttClient = new Paho.MQTT.Client(hostname, port, clientId);
 mqttClient.onMessageArrived = MessageArrived;
 mqttClient.onConnectionLost = ConnectionLost;
@@ -48,21 +48,9 @@ function ConnectionLost(res) {
 /*Callback for incoming message processing */
 function MessageArrived(message) {
 	console.log(message.destinationName + " : " + message.payloadString);
-	switch (message.payloadString) {
-		case "ON":
-			displayClass = "on";
-			break;
-		case "OFF":
-			displayClass = "off";
-			break;
-		default:
-			displayClass = "unknown";
-	}
+	g.refresh(message.payloadString)
+	temperaturas = parseFloat(message.payloadString);
 	var topic = message.destinationName.split("/");
-	if (topic.length == 3) {
-		var ioname = topic[1];
-		UpdateElement(ioname, displayClass);
-	}
 }
 
 
