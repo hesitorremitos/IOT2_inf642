@@ -14,6 +14,7 @@ function graficar_chart(data = [
         xAxis: {
             //categories: ['Apples', 'Bananas', 'Oranges']
             type: 'datetime',
+            tickInterval: 60*1000,
         },
         yAxis: {
             title: {

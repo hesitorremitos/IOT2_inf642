@@ -1,24 +1,26 @@
 <?php
     function datos () {
-        $servidor = "localhost";
+        $servidor = "serviciowebinf.site";
         //$basedatos = "db_inf640iot";
         //$basedatos = "seervic2_fisica";
-        $usuario= "root";
-        $clave = "";    
+        $usuario= "servic12_usuario123";
+        $clave = "usuario123.";    
     
     
-    $tabla="dht11";
-    $basedatos = "INF640";
+    $tabla="hector_dht11";
+    $basedatos = "servic12_inf640iot";
     //$basedatos="servici2_fisica";
     //$tabla="datos";
 
     
-    
-    $conexion = mysqli_connect($servidor,$usuario,$clave );
-    mysqli_select_db($conexion,$basedatos);
-    mysqli_query($conexion,"SET NAMES 'utf8'");
-    
-    $resultado=mysqli_query($conexion,"SELECT UNIX_TIMESTAMP(fecha_hora), temperatura FROM " .$tabla );
+    try{
+        $conexion = mysqli_connect($servidor,$usuario,$clave );
+    }catch(Exception $e){
+        print_r($e);
+    }
+        mysqli_select_db($conexion,$basedatos);
+        mysqli_query($conexion,"SET NAMES 'utf8'");    
+    $resultado=mysqli_query($conexion,"SELECT UNIX_TIMESTAMP(fecha_hora), humedad FROM " .$tabla );
         
      while ($row=mysqli_fetch_array($resultado))
      {
